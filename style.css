@@ -1,0 +1,49 @@
+header {
+    background: #E8C84E;
+    height: 50px;
+    font-size: 130%;
+    text-align: center;
+}
+
+.left {
+    background: #FFB544;
+    height: 500px;
+    width: 40%;
+    font-size: 130%;
+    float: left;
+}
+
+.center {
+    height: 500px;
+    width: 30%;
+    text-align: center;
+    float: left;
+}
+
+.right {
+    background: #E8C84E;
+    height: 500px;
+    width: 30%;
+    font-size: 130%;
+    clear: both;
+}
+
+footer {
+    background: #E8C84E;
+    height: 50px;
+    text-align: right;
+    padding: 10px;
+}
+
+li {
+    margin-top: 30px;
+    background: #FFAA00;
+}
+
+img, h3{
+    margin-top: 50px;
+}
+
+form {
+    margin-bottom: 100px;
+}
