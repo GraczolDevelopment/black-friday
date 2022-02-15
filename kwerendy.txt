@@ -1,0 +1,3 @@
+SELECT `nazwa` FROM `towary` WHERE `promocja` = 1;
+SELECT `cena` FROM `towary` WHERE `nazwa` = "Cienkopis";
+SELECT `dostawcy`.`nazwa`,  COUNT(`dostawcy`.`id`) AS `ilosc` FROM `towary` INNER JOIN `dostawcy` ON  `dostawcy`.`id` = `towary`.`idDostawcy` GROUP BY `dostawcy`.`id`;
