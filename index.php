@@ -63,7 +63,7 @@
             </form>
             <?php
 
-            if ($_SERVER['REQUEST_METHOD'] != 'POST' && isset($_POST['promocja'])) {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['promocja'])) {
                 $promocja = $_POST['promocja'];
                 $query = "SELECT `cena` FROM `towary` WHERE `nazwa` = \"$promocja\";";
 
@@ -74,10 +74,13 @@
                 }
 
                 $mysqli_result = $mysqli->query($query);
-                $result = $mysqli_result[0]["cena"] * 0.85;
 
-                $round = round($result, 2);
-                echo $round;
+                foreach ($mysqli_result as $row) {
+                    $result = $row["cena"] * 0.85;
+                    $round = round($result, 2);
+                    echo $round;
+                }
+                
 
                 $mysqli->close();
             }
