@@ -17,22 +17,72 @@
             <h3>Promocja 15% obejmuje artykuły:</h3>
             <ul>
                 <?php
-                    mysql_connect()
+                    $mysqli = mysqli_connect("localhost", "root", "", "sklep");
+
+                    if ($mysqli == false) {
+                        return;
+                    }
+
+                    $mysqli_result = $mysqli->query("SELECT `nazwa` FROM `towary` WHERE `promocja` = 1;");
+
+                    foreach ($mysqli_result as $row) {
+                        $nazwa = $row['nazwa'];
+                        echo "<li>$nazwa</li>";
+                    }
+
+                    $mysqli->close();
                 ?>
             </ul>
         </div>
         <div class="center">
             <h3>Cena wybranego artykułu w promocji</h3>
-            <form action="index.php">
+            <form action="index.php" method="post">
                 <label>
-                    <select>
-                        <option>Opcja 1</option>
-                        <option>Opcja 2</option>
-                        <option>Opcja 3</option>
+                    <select name="promocja" id="promocja">
+                        <?php
+
+                        $mysqli = mysqli_connect("localhost", "root", "", "sklep");
+
+                        if ($mysqli == false) {
+                            return;
+                        }
+
+                        $mysqli_result = $mysqli->query("SELECT `nazwa` FROM `towary` WHERE `promocja` = 1;");
+
+                        foreach ($mysqli_result as $row) {
+                            $nazwa = $row['nazwa'];
+                            echo "<option>$nazwa</option>";
+                        }
+
+                        $mysqli->close();
+
+                        ?>
                     </select>
                 </label>
                 <input type="submit">
             </form>
+            <?php
+
+            if ($_SERVER['REQUEST_METHOD'] != 'POST' && isset($_POST['promocja'])) {
+                $promocja = $_POST['promocja'];
+                $query = "SELECT `cena` FROM `towary` WHERE `nazwa` = \"$promocja\";";
+
+                $mysqli = mysqli_connect("localhost", "root", "", "sklep");
+
+                if ($mysqli == false) {
+                    return;
+                }
+
+                $mysqli_result = $mysqli->query($query);
+                $result = $mysqli_result[0]["cena"] * 0.85;
+
+                $round = round($result, 2);
+                echo $round;
+
+                $mysqli->close();
+            }
+
+            ?>
         </div>
         <div class="right">
             <h3>Kontakt</h3>
